@@ -32,7 +32,7 @@
                     </div>
                 </td>
                 <td class="text-end" colspan="3">
-                    <button class="btn btn-primary" type="button" ><i class="fas fa-pen"></i> 글쓰기</button>
+                    <button class="btn btn-primary" type="button" id = "newbdbtn"><i class="fas fa-pen"></i> 글쓰기</button>
                 </td>
             </tr>
             <tr class="table-light">
@@ -99,6 +99,7 @@
         let findbtn = document.querySelector("#findbtn");
         let findtype = document.querySelector("#findtype")
         let findkey = document.querySelector("#findkey")
+        let newbdbtn = document.querySelector("#newbdbtn");
 
         window.addEventListener('load', function () {
             let storedFindType = sessionStorage.getItem('findtype');
@@ -115,6 +116,10 @@
                 let params = `findtype=${findtype.value}&findkey=${findkey.value}`;
                 location.href = `/board/find?${params}`;
             }
+        });
+
+        newbdbtn.addEventListener('click', (e) => {
+            location.href = `/board/write`;
         });
     </script>
 </th:block>

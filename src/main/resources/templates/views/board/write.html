@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko" layout:decorate="~{layouts/layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th:block layout:fragment="css">
+    <link href="/css/member.css" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="content">
+    <main id="content">
+        <h2>게시판 글작성</h2>
+        <form id="boardfrm" method="post" name="boardfrm" novalidate>
+
+            <div class="form-floating my-2">
+                <input class="form-control" id="userid" maxlength="18" minlength="6"
+                       name="userid" placeholder="아이디" readonly value="abc123">
+                <label class="form-label" for="userid">아이디</label>
+            </div>
+
+
+            <div class="form-floating my-2">
+                <input class="form-control" id="title" name="title" placeholder="제목"
+                        type="text" required>
+                <label class="form-label" for="title">제목</label>
+            </div>
+
+            <div class="form-floating my-2">
+                <textarea class="form-control h-100" id="contents" name="contents" placeholder="본문글"
+                          required type="email" rows = "10"></textarea>
+                <label class="form-label" for="contents">본문글</label>
+            </div>
+
+            <div class="my-2 d-flex justify-content-center">
+                <div class="g-recaptcha" data-sitekey="6Le0xOgqAAAAABD-b6ahQ1wBhKEbebcMsDKESRWz"></div>
+            </div>
+
+            <div class="my-2 d-flex justify-content-between">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fa-sharp fa-solid fa-file-signature"></i> 입력완료
+                </button>
+                <button class="btn btn-danger" type="reset">
+                    <i class="fa-sharp fa-solid fa-eraser"></i> 다시입력
+                </button>
+            </div>
+        </form>
+        <!-- tinymce html editor-->
+        <div>
+            <textarea id="mytextarea">Hello, World!</textarea>
+        </div>
+    </main>
+</th:block>
+
+<th:block layout:fragment="script">
+    <script src="/js/member.js"></script>
+    <script>
+        const joinfrm = document.querySelector('#joinfrm');
+
+        joinfrm.addEventListener("submit", (e) => {
+            e.preventDefault(); // submit 버튼 기능 중지
+
+            clearErrorMessages();   // 에러메세지 초기화
+
+            // 입력 요소 유효성 검사
+            let isValid = validInputs(joinfrm);
+
+            if (isValid) submitJoinfrm(joinfrm);
+        });
+    </script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
+</th:block>
+</html>
