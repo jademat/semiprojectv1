@@ -29,23 +29,23 @@
 
 <th:block layout:fragment="content">
     <main id="content">
-        <h2>게시판 본문글</h2>
+        <h2><i class="fa-solid fa-chalkboard"></i> 게시판 본문</h2>
         <div class="row offset-1 col-10 my-3 ">
         <table class="table">
             <thead>
             <tr>
                 <td>
                     <button class="btn btn-light" type="button">
-                        이전게시물
+                        <i class="fa-solid fa-arrow-left"></i> 이전게시물
                     </button>
                     &nbsp;
                     <button class="btn btn-light" type="button">
-                        다음게시물
+                        다음게시물 <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </td>
                 <td class="text-end">
-                    <button class="btn btn-primary col-3" type="button" id="newbdbtn">
-                        새글쓰기
+                    <button class="btn btn-primary col-4" type="button" id="newbdbtn">
+                        <i class="fa-solid fa-circle-plus"></i> 새글쓰기
                     </button>
                 </td>
             </tr>
@@ -69,16 +69,16 @@
             <tr>
                 <td>
                     <button class="btn btn-warning " type="button">
-                        수정하기
+                        <i class="fa-solid fa-pen-to-square"></i> 수정하기
                     </button>
                     &nbsp;
                     <button class="btn btn-danger " type="button" id = "rmvbdbtn">
-                        삭제하기
+                        <i class="fa-solid fa-trash"></i> 삭제하기
                     </button>
                 </td>
                 <td class="text-end">
                     <button class="btn btn-light " type="button" id = "lstbdbtn">
-                        목록으로
+                        <i class="fa-solid fa-list"></i> 목록으로
                     </button>
                 </td>
             </tr>
@@ -91,17 +91,19 @@
 
 <th:block layout:fragment="script">
     <script src="/js/board.js"></script>
-    <script>
+    <script th:inline="javascript">
         let newbdbtn = document.querySelector("#newbdbtn");
-        let rmvbdbtn = document.querySelector("#rmvbdbtn")
-        let lstbdbtn = document.querySelector("#lstbdbtn")
+        let rmvbdbtn = document.querySelector("#rmvbdbtn");
+        let lstbdbtn = document.querySelector("#lstbdbtn");
+        // 질의문자열에서 bno 를 자바스크립트 코드에 삽입
+        const bno = [[${param.bno[0]}]];
 
         newbdbtn.addEventListener('click', (e) => {
                 location.href = `/board/write`;
         });
         rmvbdbtn.addEventListener('click', (e) => {
             if(confirm('정말로 삭제하시겠습니까?')){
-                location.href = `/board/remove?bno=`;
+                location.href = `/board/remove?bno=${bno}`;
             } else{
                 return;
             }
