@@ -4,6 +4,7 @@ import com.example.zzyzzy.semiprojectv1.domain.Board;
 import com.example.zzyzzy.semiprojectv1.domain.BoardDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,8 @@ public interface BoardRepository {
     int countFindBoard(Map<String,Object> params);
 
     @Select("select * from boards where bno = #{bno}")
-
     Board selectOneBoard(int bno);
+
+    @Update("update boards set views = views + 1 where bno = #{bno}")
+    void updateViewOne(int bno);
 }

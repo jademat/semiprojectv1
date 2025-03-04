@@ -17,4 +17,6 @@ public interface BoardService {
 
     Board readOneBoard(int bno);
 
+    void readOneView(int bno);
+
 }
