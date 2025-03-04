@@ -26,7 +26,7 @@ const validBoard = (form) => {
         displayErrorMessages(recaptcha,boardMessages[2]);
         isValid = false;
     }
-    alert(ggrecaptcha);
+    console.log(ggrecaptcha);
 
     return isValid;
 }
