@@ -26,13 +26,13 @@
             </div>
 
             <div class="form-floating my-2">
-                <textarea class="form-control h-100" id="contents" name="contents" placeholder="본문글"
-                          required type="email" rows = "10"></textarea>
-                <label class="form-label" for="contents">본문글</label>
+                <textarea class="form-control h-100" id="contents" name="contents"
+                          required type="text" rows = "10"></textarea>
+                <label class="form-label" for="contents">내용</label>
             </div>
 
             <div class="my-2 d-flex justify-content-center">
-                <div class="g-recaptcha" data-sitekey="6Le0xOgqAAAAABD-b6ahQ1wBhKEbebcMsDKESRWz"></div>
+                <div class="g-recaptcha" id = "recaptcha" data-sitekey="6Le0xOgqAAAAABD-b6ahQ1wBhKEbebcMsDKESRWz"></div>
             </div>
 
             <div class="my-2 d-flex justify-content-between">
@@ -44,33 +44,45 @@
                 </button>
             </div>
         </form>
-        <!-- tinymce html editor-->
-        <div>
-            <textarea id="mytextarea">Hello, World!</textarea>
-        </div>
+
     </main>
 </th:block>
 
 <th:block layout:fragment="script">
-    <script src="/js/member.js"></script>
+    <script src="/js/board.js"></script>
     <script>
-        const joinfrm = document.querySelector('#joinfrm');
+        const boardfrm = document.querySelector('#boardfrm');
 
-        joinfrm.addEventListener("submit", (e) => {
+        boardfrm.addEventListener("submit", (e) => {
             e.preventDefault(); // submit 버튼 기능 중지
 
             clearErrorMessages();   // 에러메세지 초기화
 
             // 입력 요소 유효성 검사
-            let isValid = validInputs(joinfrm);
+            let isValid = validBoard(boardfrm);
 
-            if (isValid) submitJoinfrm(joinfrm);
+            if (isValid) submitBoardfrm(boardfrm);
         });
     </script>
-    <script>
+   <!-- <script>
         tinymce.init({
-            selector: '#mytextarea'
+            selector: 'textarea',
+            plugins: [
+                // Core editing features
+                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                // Your account includes a free trial of TinyMCE premium features
+                // Try the most popular premium features until Mar 18, 2025:
+                'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+            ],
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
         });
-    </script>
+    </script>-->
 </th:block>
 </html>
