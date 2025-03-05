@@ -38,4 +38,7 @@ public interface BoardRepository {
     @Select("select * from replys where pno = #{pno} order by ref")
     List<Reply> selectReply(int pno);
 
+    @Insert("insert into replys (userid,comments,ref,pno) values (#{userid} ,#{comments},#{ref},#{pno})")
+    int insertComment(NewReplyDTO newReplyDTO);
+
 }

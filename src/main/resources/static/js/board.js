@@ -60,3 +60,4 @@ const displayErrorMessages = (input, message) => {
     error.textContent = message;
     input.parentElement.appendChild(error);
 }
+

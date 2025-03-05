@@ -6,7 +6,8 @@ insert into members (userid, passwd, name, email) values
 
 
 -- replys 테이블
-insert into replys (comments, userid, ref, pno) values ('안녕하세요', 'abc123', 1, 3000);
+/*insert into replys (comments, userid, ref, pno) values ('안녕하세요', 'abc123', 1, 3000);
 insert into replys (comments, userid, ref, pno) values ( '방가방가!', '987xyz', 2, 3000);
 insert into replys (comments, userid, ref, pno) values ( '오늘춥네여', '냐옹냐옹', 3, 3000);
 insert into replys (comments, userid, ref, pno) values ( '날씨는요?', 'abc123', 2, 3000);
+*/

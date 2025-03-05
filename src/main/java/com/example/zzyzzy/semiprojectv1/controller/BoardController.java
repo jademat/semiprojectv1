@@ -99,7 +99,15 @@ public class BoardController {
         if(!boardService.newReply(newreplyDTO)){
             returnPage = "redirect:/board/error?type=1";
         }
+        return returnPage;
+    }
 
+    @PostMapping("/cmmt")
+    public String cmmtok(NewReplyDTO newreplyDTO){
+        String returnPage = "redirect:/board/view?bno=" + newreplyDTO.getPno();
+        if(!boardService.newComment(newreplyDTO)){
+            returnPage = "redirect:/board/error?type=1";
+        }
         return returnPage;
     }
 }
