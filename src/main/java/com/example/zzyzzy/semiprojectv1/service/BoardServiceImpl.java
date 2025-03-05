@@ -1,9 +1,6 @@
 package com.example.zzyzzy.semiprojectv1.service;
 
-import com.example.zzyzzy.semiprojectv1.domain.Board;
-import com.example.zzyzzy.semiprojectv1.domain.BoardDTO;
-import com.example.zzyzzy.semiprojectv1.domain.NewBoardDTO;
-import com.example.zzyzzy.semiprojectv1.domain.NewReplyDTO;
+import com.example.zzyzzy.semiprojectv1.domain.*;
 import com.example.zzyzzy.semiprojectv1.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,6 +71,11 @@ public class BoardServiceImpl implements BoardService {
     public boolean newReply(NewReplyDTO newReplyDTO) {
         int result = boardMapper.insertReply(newReplyDTO);
         return result > 0;
+    }
+
+    @Override
+    public List<Reply> readReply(int pno) {
+        return boardMapper.selectReply(pno);
     }
 
 
