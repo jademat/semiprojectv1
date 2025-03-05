@@ -85,6 +85,28 @@
             </tfoot>
 
         </table>
+
+            <div class="my-3">
+                <h3><i class="fa-solid fa-comments"></i> 나도 한마디</h3>
+                <div class="py-3">
+                    <form class="card card-body bg-light" method="post"
+                          name="replyfrm" id="replyfrm">
+                        <div class="row align-items-center">
+                            <div class="col text-center"><label>abc123</label></div>
+
+                            <div class="col-8"><textarea id="comments" rows="10" name="comments"
+                                                         class="form-control col-7"></textarea></div>
+
+                            <div class="col"><button type="button" id="replybtn"
+                                                     class="btn btn-dark">
+                                <i class="fa fa-commenting"></i>
+                                댓글쓰기</button></div>
+                        </div>
+                        <input type="hidden" name="userid" value="abc123" />
+                        <input type="hidden" name="pno" th:value="${param.bno}" />
+                    </form>
+                </div><!-- 댓글쓰기 -->
+            </div>
         </div>
     </main>
 </th:block>
@@ -95,6 +117,7 @@
         let newbdbtn = document.querySelector("#newbdbtn");
         let rmvbdbtn = document.querySelector("#rmvbdbtn");
         let lstbdbtn = document.querySelector("#lstbdbtn");
+        let replybtn = document.querySelector("#replybtn");
         // 질의문자열에서 bno 를 자바스크립트 코드에 삽입
         const bno = [[${param.bno[0]}]];
 
@@ -110,6 +133,17 @@
         });
         lstbdbtn.addEventListener('click', (e) => {
             location.href = `/board/list`;
+        });
+
+        replybtn.addEventListener('click', (e) => {
+            const comments = document.querySelector('#comments');
+            const replyfrm = document.querySelector('#replyfrm');
+            if(comments.value === ''){
+                alert('댓글을 작성해주세요.');
+                return;
+            }
+            replyfrm.action = '/board/reply';
+            replyfrm.submit();
         });
     </script>
 </th:block>

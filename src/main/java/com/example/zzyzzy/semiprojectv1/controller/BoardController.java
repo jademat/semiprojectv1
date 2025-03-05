@@ -1,6 +1,7 @@
 package com.example.zzyzzy.semiprojectv1.controller;
 
 import com.example.zzyzzy.semiprojectv1.domain.NewBoardDTO;
+import com.example.zzyzzy.semiprojectv1.domain.NewReplyDTO;
 import com.example.zzyzzy.semiprojectv1.service.BoardService;
 import com.example.zzyzzy.semiprojectv1.service.GoogleRecaptchaService;
 import lombok.RequiredArgsConstructor;
@@ -91,4 +92,14 @@ public class BoardController {
     }
 
 
+    @PostMapping("/reply")
+    public String replyok(NewReplyDTO newreplyDTO){
+        String returnPage = "redirect:/board/view?bno=" + newreplyDTO.getPno();
+
+        if(!boardService.newReply(newreplyDTO)){
+            returnPage = "redirect:/board/error?type=1";
+        }
+
+        return returnPage;
+    }
 }
