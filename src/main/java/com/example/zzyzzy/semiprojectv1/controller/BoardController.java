@@ -69,7 +69,7 @@ public class BoardController {
 
         if(session.getAttribute("loginUser") != null) {
             m.addAttribute("sitekey",System.getenv("recaptcha.sitekey"));
-            returnPage = "redirect:/board/write";
+            returnPage = "views/board/write";
         }
 
         return returnPage;

@@ -13,4 +13,6 @@ public class GalleryController {
         return "views/gallery/list";
     }
 
+
+
 }

@@ -31,3 +31,25 @@ create table if not exists replys (
     -- foreign key (pno) references boards (bno)
 );
 
+create table if not exists gallerys (
+    gno int auto_increment,
+    title varchar(128) not null,
+    userid varchar(18) not null,
+    regdate datetime default current_timestamp,
+    thumbs int default 0,
+    views int default 0,
+    contents text not null ,
+    simgname varchar(128) not null,
+    primary key(gno),
+    foreign key (userid) references members (userid)
+);
+
+create table if not exists gallery_images (
+    gino int auto_increment,
+    gno int not null,
+    imgname varchar(128) not null,
+    imgsize int not null,
+    regdate datetime default current_timestamp,
+    primary key(gino),
+    foreign key (gno) references gallerys (gno)
+);
