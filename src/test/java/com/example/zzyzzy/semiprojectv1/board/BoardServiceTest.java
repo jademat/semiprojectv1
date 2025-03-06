@@ -2,6 +2,7 @@ package com.example.zzyzzy.semiprojectv1.board;
 
 import com.example.zzyzzy.semiprojectv1.domain.Board;
 import com.example.zzyzzy.semiprojectv1.domain.BoardDTO;
+import com.example.zzyzzy.semiprojectv1.domain.BoardListDTO;
 import com.example.zzyzzy.semiprojectv1.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
@@ -33,8 +34,8 @@ public class BoardServiceTest {
         int cpg = 1; // 현재 페이지가 1일 경우의 리스트를 읽어옴.
 
         // When
-        List<BoardDTO> results = boardService.readBoard(cpg);
-
+       //List<BoardDTO> results = boardService.readBoard(cpg);
+        BoardListDTO results = boardService.readBoard(cpg);
         // Then
         assertNotNull(results);
     }
