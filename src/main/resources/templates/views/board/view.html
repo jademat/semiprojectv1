@@ -50,7 +50,7 @@
                     </button>
                 </td>
                 <td class="text-end">
-                    <button class="btn btn-primary col-4" type="button" id="newbdbtn">
+                    <button class="btn btn-primary col-4" type="button" id="newbdbtn" th:if = "${session.loginUser ne null}">
                         <i class="fa-solid fa-circle-plus"></i> 새글쓰기
                     </button>
                 </td>
@@ -175,7 +175,7 @@
         // 질의문자열에서 bno 를 자바스크립트 코드에 삽입
         const bno = [[${param.bno[0]}]];
 
-        newbdbtn.addEventListener('click', (e) => {
+        newbdbtn?.addEventListener('click', (e) => {
                 location.href = `/board/write`;
         });
         rmvbdbtn.addEventListener('click', (e) => {
@@ -189,7 +189,7 @@
             location.href = `/board/list`;
         });
 
-        replybtn.addEventListener('click', (e) => {
+        replybtn?.addEventListener('click', (e) => {
             const comments = document.querySelector('#comments');
             const replyfrm = document.querySelector('#replyfrm');
             if(comments.value === ''){
