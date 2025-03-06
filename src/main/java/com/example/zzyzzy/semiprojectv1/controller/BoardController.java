@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/board")
@@ -62,11 +63,16 @@ public class BoardController {
     }
 
     @GetMapping("/write")
-    public String write(Model m) {
+    public String write(Model m, HttpSession session) {
         // 시스템 환경 변수에 저장된 사이트키 불러옴
-        m.addAttribute("sitekey",System.getenv("recaptcha.sitekey"));
+        String returnPage = "redirect:/member/login";
 
-        return "views/board/write";
+        if(session.getAttribute("loginUser") != null) {
+            m.addAttribute("sitekey",System.getenv("recaptcha.sitekey"));
+            returnPage = "redirect:/board/write";
+        }
+
+        return returnPage;
     }
 
     @PostMapping("/write")

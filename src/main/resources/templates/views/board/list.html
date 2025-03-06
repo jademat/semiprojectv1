@@ -32,7 +32,7 @@
                     </div>
                 </td>
                 <td class="text-end" colspan="3">
-                    <button class="btn btn-primary" type="button" id = "newbdbtn"><i class="fas fa-pen"></i> 글쓰기</button>
+                    <button class="btn btn-primary" type="button" id = "newbdbtn" th:if="${session.loginUser ne null}"><i class="fas fa-pen"></i> 글쓰기</button>
                 </td>
             </tr>
             <tr class="table-light">

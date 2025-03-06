@@ -14,7 +14,7 @@
 
             <div class="form-floating my-2">
                 <input class="form-control" id="userid" maxlength="18" minlength="6"
-                       name="userid" placeholder="아이디" readonly value="abc123">
+                       name="userid" placeholder="아이디" readonly th:value="${session.loginUser.userid}">
                 <label class="form-label" for="userid">아이디</label>
             </div>
 
