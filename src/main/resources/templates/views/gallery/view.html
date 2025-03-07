@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko" layout:decorate="~{layouts/layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        /* gallery view */
+        .vtit {
+            height: 100px; border-bottom: 3px solid black;
+            background: #dff0f8 !important; font-size: 32px; text-align: center;
+        }
+
+        .vinfo { height: 35px; background: #ccff99 !important; }
+        .vinfo td { padding: 5px }
+
+        .vcont {
+            height: 500px; border-bottom: 3px solid black;
+            background: #ffffcc !important; padding: 5px; vertical-align: top;
+        }
+
+        .cmtbg { background: yellow; padding: 5px; }
+
+        .rpybg { background: lime; padding: 5px; }
+
+
+        .reply-border { border-top: 1px solid silver;
+            border-bottom:1px solid silver }
+
+        .pushend { float: right }
+
+        .pre { white-space: pre-wrap; } /*본문글 줄바꿈 표시*/
+    </style>
+</head>
+
+<th:block layout:fragment="content">
+    <main id="content">
+        <h2><i class="fa-solid fa-images"></i> 이미지 겔러리 본문글</h2>
+        <div class="row offset-1 col-10 my-3 ">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>
+                    <button class="btn btn-light" type="button">
+                        <i class="fa-solid fa-arrow-left"></i> 이전게시물
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-light" type="button">
+                        다음게시물 <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </td>
+                <td class="text-end">
+                    <button class="btn btn-primary col-4" type="button" id="newgalbtn" th:if = "${session.loginUser ne null}">
+                        <i class="fa-solid fa-circle-plus"></i> 새글쓰기
+                    </button>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th class="vtit" colspan="2" th:text="${galgi.gal.title}">제목</th>
+
+            </tr>
+
+            <tr >
+                <td th:text="${galgi.gal.userid}" class="vinfo">작성자</td>
+                <td class="text-end vinfo" th:text="|${#strings.substring(galgi.gal.regdate,0,10)} / ${galgi.gal.thumbs} / ${galgi.gal.views}|" >작성일/추천/조회</td>
+            </tr>
+
+            <tr>
+                <td class="vcont " colspan="2" >
+                    <div class = "pre">[[${galgi.gal.contents}]]</div>
+                    <th:block th:each="g : ${galgi.gi}">
+                    <img th:src = "|http://localhost/cdn/${g.imgname}|"
+                        class="img-fluid">
+                    </th:block>
+
+                    <th:block th:each="g : ${galgi.gi}">
+                        <div class = "bg-light" th:text = "|${g.imgname} (${g.imgsize})kb|"></div>
+                    </th:block>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>
+                    <button class="btn btn-warning " type="button">
+                        <i class="fa-solid fa-pen-to-square"></i> 수정하기
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-danger " type="button" id = "rmvgalbtn">
+                        <i class="fa-solid fa-trash"></i> 삭제하기
+                    </button>
+                </td>
+                <td class="text-end">
+                    <button class="btn btn-light " type="button" id = "lstgalbtn">
+                        <i class="fa-solid fa-list"></i> 목록으로
+                    </button>
+                </td>
+            </tr>
+            </tfoot>
+        </table><!-- 댓글 / 대댓글 목록-->
+
+
+</th:block>
+
+<th:block layout:fragment="script">
+    <script src="/js/gallery.js"></script>
+    <script th:inline="javascript">
+        let newgalbtn = document.querySelector("#newgalbtn");
+        let rmvgalbtn = document.querySelector("#rmvgalbtn");
+        let lstgalbtn = document.querySelector("#lstgalbtn");
+
+        // 질의문자열에서 bno 를 자바스크립트 코드에 삽입
+        const gno = [[${gno}]];
+
+        newgalbtn?.addEventListener('click', (e) => {
+                location.href = `/gallery/write`;
+        });
+        rmvgalbtn.addEventListener('click', (e) => {
+            if(confirm('정말로 삭제하시겠습니까?')){
+                location.href = `/gallery/remove/${gno}`;
+            } else{
+                return;
+            }
+        });
+        lstgalbtn.addEventListener('click', (e) => {
+            location.href = `/gallery/list`;
+        });
+
+    </script>
+</th:block>
+</html>
